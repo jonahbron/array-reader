@@ -1,0 +1,13 @@
+{
+    "name": "jonahbron/array-reader",
+    "description": "Easily extract data from complicated array structures",
+    "license": "BSD 3-Clause",
+    "authors": [
+        {
+            "name": "Jonah Dahlquist",
+            "email": "jonah@nucleussystems.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
