@@ -21,7 +21,7 @@ class ArrayReader {
         $is_undefined = false;
         foreach (func_get_args() as $key) {
             if (is_array($data)) {
-                if (array_key_exists($data, $key)) {
+                if (array_key_exists($key, $data)) {
                     $data = $data[$key];
                 } else {
                     $data = array();
@@ -40,7 +40,7 @@ class ArrayReader {
         $data = $this->data;
         foreach (func_get_args() as $key) {
             if (is_array($data)) {
-                if (array_key_exists($data, $key)) {
+                if (array_key_exists($key, $data)) {
                     $data = $data[$key];
                 } else {
                     return false;
