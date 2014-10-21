@@ -2,7 +2,7 @@
 
 namespace ArrayReader;
 
-class ArrayReader {
+class ArrayReader implements ArrayAccess, Iterator {
 
     private $data = null;
     private $is_undefined = null;
@@ -89,6 +89,56 @@ class ArrayReader {
             $value = array($value);
         }
         return $value;
+    }
+
+    /*
+     * ArrayAccess methods
+     */
+
+    public function offsetExists($key) {
+        return $this->has($key);
+    }
+
+    public function offsetGet($key) {
+        return $this->get($key);
+    }
+
+    public function offsetSet($key) {
+        // Nothing, don't allow setting
+    }
+
+    public function offsetUnset($key) {
+        // Nothing, don't allow unsetting
+    }
+
+    /*
+     * Iterator methods
+     */
+
+    public function current() {
+        if (is_array($this->data)) {
+            return current($this->data);
+        }
+    }
+
+    public function key() {
+        if (is_array($this->data)) {
+            return key($this->data);
+        }
+    }
+
+    public function next() {
+        if (is_array($this->data)) {
+            next($this->data);
+        }
+    }
+
+    public function rewind() {
+        if (is_array($this->data)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
