@@ -2,7 +2,7 @@
 
 namespace ArrayReader;
 
-class ArrayReader implements ArrayAccess, Iterator {
+class ArrayReader implements \ArrayAccess, \Iterator {
 
     private $data = null;
     private $is_undefined = null;
@@ -103,7 +103,7 @@ class ArrayReader implements ArrayAccess, Iterator {
         return $this->get($key);
     }
 
-    public function offsetSet($key) {
+    public function offsetSet($key, $value) {
         // Nothing, don't allow setting
     }
 
@@ -134,6 +134,12 @@ class ArrayReader implements ArrayAccess, Iterator {
     }
 
     public function rewind() {
+        if (is_array($this->data)) {
+            rewind($this->data);
+        }
+    }
+
+    public function valid() {
         if (is_array($this->data)) {
             return true;
         } else {
