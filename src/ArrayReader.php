@@ -20,15 +20,10 @@ class ArrayReader {
         $data = $this->data;
         $is_undefined = false;
         foreach (func_get_args() as $key) {
-            if (is_array($data)) {
-                if (array_key_exists($key, $data)) {
-                    $data = $data[$key];
-                } else {
-                    $data = array();
-                    $is_undefined = true;
-                    break;
-                }
+            if (is_array($data) && array_key_exists($key, $data)) {
+                $data = $data[$key];
             } else {
+                $data = null;
                 $is_undefined = true;
                 break;
             }
@@ -39,12 +34,8 @@ class ArrayReader {
     public function has() {
         $data = $this->data;
         foreach (func_get_args() as $key) {
-            if (is_array($data)) {
-                if (array_key_exists($key, $data)) {
-                    $data = $data[$key];
-                } else {
-                    return false;
-                }
+            if (is_array($data) && array_key_exists($key, $data)) {
+                $data = $data[$key];
             } else {
                 return false;
             }
