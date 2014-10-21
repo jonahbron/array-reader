@@ -1,6 +1,6 @@
 <?php
 
-namespace ArrayReader
+namespace ArrayReader;
 
 class ArrayReader {
 
@@ -72,7 +72,7 @@ class ArrayReader {
         return doubleval($this->value($default));
     }
 
-    public function array($default=array()) {
+    public function asArray($default=array()) {
         $value = $this->value($default);
         if (is_array($value)) {
             return $value;
@@ -82,12 +82,12 @@ class ArrayReader {
     }
 
     public function each($callback) {
-        foreach ($this->array() as $key => $value) {
+        foreach ($this->asArray() as $key => $value) {
             $callback(new ArrayReader($value), $key);
         }
     }
 
-    public function do($callback) {
+    public function with($callback) {
         if (!$this->is_undefined) {
             $callback($this);
         }
