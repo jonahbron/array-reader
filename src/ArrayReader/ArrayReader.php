@@ -147,4 +147,8 @@ class ArrayReader implements \ArrayAccess, \Iterator {
         }
     }
 
+    public function _toString() {
+        return $this->string();
+    }
+
 }
