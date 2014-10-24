@@ -84,6 +84,13 @@ class ArrayReader implements \ArrayAccess, \Iterator {
         }
     }
 
+    public function reduce($callback, $carry=0) {
+        foreach ($this->asArray() as $key => $item) {
+            $carry = $callback($carry, $this->get($key));
+        }
+        return $carry;
+    }
+
     private static function toArray($value) {
         if (!is_array($value)) {
             $value = array($value);
@@ -117,7 +124,7 @@ class ArrayReader implements \ArrayAccess, \Iterator {
 
     public function current() {
         if (is_array($this->data)) {
-            return current($this->data);
+            return $this->get(key($this->data));
         }
     }
 
