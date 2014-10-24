@@ -56,7 +56,7 @@ class ArrayReader implements \ArrayAccess, \Iterator {
     }
 
     public function integer($default=0) {
-        return intval($this->value($default));
+        return intval(preg_replace('/[^\d]/', '', $this->value($default)));
     }
 
     public function float($default=0.0) {
@@ -89,6 +89,24 @@ class ArrayReader implements \ArrayAccess, \Iterator {
             $carry = $callback($carry, $this->get($key));
         }
         return $carry;
+    }
+
+    public function sum($callback=null) {
+        $total = 0;
+        if (is_callable($callback)) {
+            foreach ($this->asArray() as $key => $item) {
+                $total += $callback($this->get($key));
+            }
+        } elseif ($callback !== null) {
+            foreach ($this->asArray() as $key => $item) {
+                $total += $this->get($key)->float();
+            }
+        } else {
+            foreach ($this->asArray() as $item) {
+                $total += $item;
+            }
+        }
+        return $total;
     }
 
     private static function toArray($value) {
