@@ -60,7 +60,7 @@ class ArrayReader implements \ArrayAccess, \Iterator {
     }
 
     public function float($default=0.0) {
-        return doubleval($this->value($default));
+        return doubleval(preg_replace('/[^\d\.]/', '', $this->value($default)));
     }
 
     public function asArray($default=array()) {
