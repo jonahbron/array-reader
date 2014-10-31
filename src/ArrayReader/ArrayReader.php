@@ -113,6 +113,15 @@ class ArrayReader implements \ArrayAccess, \Iterator {
         return $total;
     }
 
+    public function find($callback) {
+        foreach ($this as $key => $value) {
+            if ($callback($value, $key)) {
+                return $value;
+            }
+        }
+        return new ArrayReader(null, true);
+    }
+
     private static function toArray($value) {
         if (!is_array($value)) {
             $value = array($value);
