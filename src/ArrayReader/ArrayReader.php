@@ -63,6 +63,10 @@ class ArrayReader implements \ArrayAccess, \Iterator {
         return doubleval(preg_replace('/[^\d\.]/', '', $this->value($default)));
     }
 
+    public function bool($default=false) {
+        return boolval($this->value($default));
+    }
+
     public function asArray($default=array()) {
         $value = $this->value($default);
         if (is_array($value)) {
@@ -172,7 +176,7 @@ class ArrayReader implements \ArrayAccess, \Iterator {
         }
     }
 
-    public function _toString() {
+    public function __toString() {
         return $this->string();
     }
 
